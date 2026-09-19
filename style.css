@@ -101,5 +101,8 @@ h2 {
 
  }
   coords-box {
-    display
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin : 1.5rem 0;
   }
