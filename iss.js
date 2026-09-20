@@ -23,3 +23,37 @@ function showISS(data) {
     const now = new Date();
     document.getElementById('update-time').textContent='Last updated: ${now.toLocaleTimeString()}';
 }
+
+function fetchISS() {
+    fetch(ISSURL)
+    .then(res => res.json())
+    .then(data => showISS(data));
+}
+
+function fetchAstronauts (){
+    fetch(ASTROURL)
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById('astro-count').textContent = '${data.number} people are currently in space';
+        const list = document.getElementById('astro-list');
+        list.innerHTML= '';
+
+        data.people.forEach(person => {
+            const li = document.createElement9('li');
+            li.textContent='${person.name} - ${person.craft}';
+            list.appendChild(li);
+        });
+
+    });
+}
+
+document.getElementById('unit-btn').addEventListener('click', () =>{
+    isMetric= !isMetric;
+    document.getElementById('unit-btn').textContent = isMetric ? 'Switch to Metric' :
+    fetchISS();
+});
+
+fetchISS();
+fetchAstronauts();
+
+setInterval(fetchISS,5000);
