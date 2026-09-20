@@ -1,4 +1,5 @@
-const APIKEY ="Demo_Key";
+import "dotenv/config";
+const APIKEY = process.env.NASA_API;
 const BASEURL ="https://api.nasa.gov/planetry/apod";
 
 function showAPOD(data) {
