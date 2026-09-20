@@ -58,4 +58,9 @@ function startCountdown() {
 
 }
 
+document.getElementById('random-btn').addEventListener('click' , loadrandom);
+
+loadToday();
+startCountdown();
+
     
