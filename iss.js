@@ -8,12 +8,12 @@ function kmToMiles(km) {
  
 function showISS(data) {
     const alt=isMetric
-    ? '${data.altitude.toFixed(2)} km'
-    : '${kmToMiles(data.altitude)} mi';
+    ? `${data.altitude.toFixed(2)} km`
+    : `${kmToMiles(data.altitude)} mi`;
 
     const spd = isMetric
-    ? '${data.velocity.toFixed(2)} km/h'
-    : '${kmToMiles(data.velocity)} mph' ;
+    ? `${data.velocity.toFixed(2)} km/h`
+    : `${kmToMiles(data.velocity)} mph` ;
 
     document.getElementById('lat').textContent = data.latitude.toFixed(4);
     document.getElementById('lon').textContent = data.longitude.toFixed(4);
@@ -21,7 +21,7 @@ function showISS(data) {
     document.getElementById('speed').textContent = spd;
 
     const now = new Date();
-    document.getElementById('update-time').textContent='Last updated: ${now.toLocaleTimeString()}';
+    document.getElementById('update-time').textContent=`Last updated: ${now.toLocaleTimeString()}`;
 }
 
 function fetchISS() {
@@ -34,13 +34,13 @@ function fetchAstronauts (){
     fetch(ASTROURL)
     .then(res => res.json())
     .then(data => {
-        document.getElementById('astro-count').textContent = '${data.number} people are currently in space';
+        document.getElementById('astro-count').textContent = `${data.number} people are currently in space`;
         const list = document.getElementById('astro-list');
         list.innerHTML= '';
 
         data.people.forEach(person => {
             const li = document.createElement9('li');
-            li.textContent='${person.name} - ${person.craft}';
+            li.textContent=`${person.name} - ${person.craft}`;
             list.appendChild(li);
         });
 
