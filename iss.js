@@ -1,5 +1,5 @@
 const ISSURL='https://api.wheretheiss.at/v1/satellites/25544';
-const ASTROURL='https://corsproxy.io/?https://open-notify.org/astros.json';
+const ASTROURL = "https://late-tree-9626.stesting561.workers.dev?url=" + encodeURIComponent("http://api.open-notify.org/astros.json");
 
 let isMetric = true;
 function kmToMiles(km) {
@@ -32,24 +32,26 @@ function fetchISS() {
 
 function fetchAstronauts (){
     fetch(ASTROURL)
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById('astro-count').textContent = `${data.number} people are currently in space`;
-        const list = document.getElementById('astro-list');
-        list.innerHTML= '';
-
-        data.people.forEach(person => {
-            const li = document.createElement9('li');
-            li.textContent=`${person.name} - ${person.craft}`;
-            list.appendChild(li);
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('astro-count').textContent = `${data.number} people are currently in space.`;
+            const list = document.getElementById('astro-list');
+            list.innerHTML = '';
+            data.people.forEach(person => {
+                const li = document.createElement('li');
+                li.textContent = `${person.name} - ${person.craft}`;
+                list.appendChild(li);
+            });
+        })
+        .catch(err=> {
+            document.getElementById('astro-count').textContent = 'Could not load astronaut data';
+            console.log(err);
         });
-
-    });
 }
 
 document.getElementById('unit-btn').addEventListener('click', () =>{
     isMetric= !isMetric;
-    document.getElementById('unit-btn').textContent = isMetric ? 'Switch to Metric' :
+    document.getElementById('unit-btn').textContent = isMetric ? 'Switch to Imperial' : 'Switch to Metric';
     fetchISS();
 });
 
